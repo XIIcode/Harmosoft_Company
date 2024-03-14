@@ -31,6 +31,9 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
 </head>
 
 <body>
@@ -111,7 +114,7 @@
                             <p class="text-center mb-4">Contact us today and get in touch.</p>
 
 
-                            <form action="https://formsubmit.co/8c27079653b2ece90b9a4795c9964b22" method="POST">
+                            <form action="send_email.php" method="POST">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
@@ -140,12 +143,34 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                        <!-- <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button> -->
+                                        <input type="submit" class="btn btn-primary w-100 py-3" id="submit" onclick="sendMail()">
+                                        
+                                        <script type="text/javascript">
+                                    function sendMail(){
+                                                (function(){
+                                                    emailjs.init("J5e3RK0YdfaCDMK56");
+                                                })();
+                                            
+                                            var params = {
+                                                senderName : document.querySelector('#name').value,
+                                                subject : document.querySelector('#subject').value,
+                                                message : document.querySelector('#message').value,
+                                                email : document.querySelector('#email').value,
+                                                to : 'danielgitonga007@gmail.com'
+                                            };
+                                            var serviceID = "service_rx52myb";
+                                            var templateID = "template_xaf42fi"
+
+                                            emailjs.send(serviceID, templateID, params).then( res => {
+                                                alert("Email sent successfully");
+                                            }).catch();
+                                        }
+                                    
+                                        </script>
                                     </div>
                                 </div>
                             </form>
-
-
                         </div>
                     </div>
                 </div>
